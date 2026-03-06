@@ -3,10 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My GitHub Pages</title>
+    <title>Shopping Cart Feature</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        h1 { text-align: center; }
+        .product { margin: 15px; padding: 10px; border: 1px solid #ccc; text-align: center; }
+        .cart { margin-top: 20px; border-top: 2px solid #000; padding-top: 10px; }
+        .cart-item { margin: 10px 0; }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My GitHub Pages</h1>
-    <p>This is a placeholder for the GitHub Pages deployment.</p>
+    <h1>Product Listing</h1>
+    <div id="product-list">
+        <div class="product">
+            <h3>Product 1</h3>
+            <p>Price: $10</p>
+            <button onclick="addToCart('Product 1', 10)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <h3>Product 2</h3>
+            <p>Price: $15</p>
+            <button onclick="addToCart('Product 2', 15)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <h3>Product 3</h3>
+            <p>Price: $20</p>
+            <button onclick="addToCart('Product 3', 20)">Add to Cart</button>
+        </div>
+    </div>
+    <div class="cart">
+        <h2>Shopping Cart</h2>
+        <div id="cart-items"></div>
+        <p>Total: $<span id="total">0</span></p>
+    </div>
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function addToCart(product, price) {
+            cart.push({ product, price });
+            total += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = '';
+            cart.forEach(item => {
+                const element = document.createElement('div');
+                element.className = 'cart-item';
+                element.innerText = `${item.product} - $${item.price}`;
+                cartItemsDiv.appendChild(element);
+            });
+            document.getElementById('total').innerText = total;
+        }
+    </script>
 </body>
 </html>
